@@ -1,0 +1,344 @@
+{
+  "paragraphs": [
+    {
+      "title": "Parameters from request",
+      "text": "%yadaps_aisuite\n//---------------------------------------------------------------------------------------------------\n// read the necessary vars from the input fields as provided in the call\n//---------------------------------------------------------------------------------------------------\nval mailingId \u003d z.input(\"mailingId\",4711).toString\nval taskId \u003d z.input(\"taskId\").toString\nval callbackUrl \u003d z.input(\"callbackUrl\").toString\nval dir \u003d z.input(\"workDir\", \"./work/4711\").toString",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:12.157",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {
+          "mailingId": "4711",
+          "taskId": "",
+          "callbackUrl": "",
+          "workDir": "./work/4711"
+        },
+        "forms": {
+          "mailingId": {
+            "type": "TextBox",
+            "name": "mailingId",
+            "displayName": "mailingId",
+            "defaultValue": "4711",
+            "hidden": false
+          },
+          "taskId": {
+            "type": "TextBox",
+            "name": "taskId",
+            "displayName": "taskId",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "callbackUrl": {
+            "type": "TextBox",
+            "name": "callbackUrl",
+            "displayName": "callbackUrl",
+            "defaultValue": "",
+            "hidden": false
+          },
+          "workDir": {
+            "type": "TextBox",
+            "name": "workDir",
+            "displayName": "workDir",
+            "defaultValue": "./work/4711",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\nmailingId: String \u003d 4711\nwarning: there was one deprecation warning; re-run with -deprecation for details\ntaskId: String \u003d \"\"\nwarning: there was one deprecation warning; re-run with -deprecation for details\ncallbackUrl: String \u003d \"\"\nwarning: there was one deprecation warning; re-run with -deprecation for details\ndir: String \u003d ./work/4711\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544368963733_-868188878",
+      "id": "20181209-162243_238307459",
+      "dateCreated": "2018-12-09 16:22:43.733",
+      "dateStarted": "2018-12-10 11:39:47.504",
+      "dateFinished": "2018-12-10 11:40:01.390",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Geburtstag_Print setup sequence",
+      "text": "%yadaps_aisuite\n// import all necessary objects to work with\nimport org.aicgroup.yadaps.{yFiles \u003d\u003e files}\nimport org.aicgroup.yadaps.yJdbc._\nimport org.aicgroup.yadaps.{yAisuite \u003d\u003e aisuite}\nimport org.aicgroup.yadaps.{yFtp \u003d\u003e ftp}\nimport org.aicgroup.yadaps.yAisuite._\nimport org.aicgroup.yadaps.JSONObjectPlus\nimport org.aicgroup.yadaps.yAisuite.YInterpolation\nimport org.aicgroup.yadaps.yAisuite.{CtxEnv, extraction}\nimport org.aicgroup.yadaps.yAisuite.extraction.WorkDir\nimport org.aicgroup.yadaps.IO\nimport org.aicgroup.yadaps.JSONObjectPlus.{fromSingleQuoteString \u003d\u003e jsonSingle}\n\nimplicit val sparkSession \u003d spark\nimplicit val jdbcCredits:JdbcCredits \u003d creditsByName(\"jdbc.mssql\") \n\nimplicit val workDir:WorkDir \u003d extraction.WorkDir(dir)\n//---------------------------------------------------------------------------------------------------\n// Read the extraction object\n//---------------------------------------------------------------------------------------------------\n// make the mailingJson available\nval mailingJson \u003d extraction.mailingJson\n// set it in the path for variable substitution\nctx \u003d CtxEnv(mailingJson)\n//---------------------------------------------------------------------------------------------------\n// Prepare the neccesary directories to work with\n//---------------------------------------------------------------------------------------------------\nval mailingName \u003d y\"${\"name\"}\"\nval resultsDir \u003d s\"${workDir.path}/results\"\n\nIO.ensureDir(s\"$resultsDir\")\nIO.ensureDirEmpty(s\"$resultsDir\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:12.175",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "editorHide": false,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {
+          "mailingId": "4711",
+          "taskId": "",
+          "callbackUrl": ""
+        },
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.aicgroup.yadaps.{yFiles\u003d\u003efiles}\nimport org.aicgroup.yadaps.yJdbc._\nimport org.aicgroup.yadaps.{yAisuite\u003d\u003eaisuite}\nimport org.aicgroup.yadaps.{yFtp\u003d\u003eftp}\nimport org.aicgroup.yadaps.yAisuite._\nimport org.aicgroup.yadaps.JSONObjectPlus\nimport org.aicgroup.yadaps.yAisuite.YInterpolation\nimport org.aicgroup.yadaps.yAisuite.{CtxEnv, extraction}\nimport org.aicgroup.yadaps.yAisuite.extraction.WorkDir\nimport org.aicgroup.yadaps.IO\nimport org.aicgroup.yadaps.JSONObjectPlus.{fromSingleQuoteString\u003d\u003ejsonSingle}\nsparkSession: org.apache.spark.sql.SparkSession \u003d org.apache.spark.sql.SparkSession@3a71b08a\njdbcCredits: org.aicgroup.yadaps.yJdbc.JdbcCredits \u003d JdbcCredits(jdbc:jtds:sqlserver://192.168.200.84:1433/HAGEBAU_ABNAHME,aic_testdwh,aic,mssql,null,null)\nworkDir: org.aicgroup.yadaps.yAisuite.extraction.WorkDir \u003d WorkDir(./work/4711)\nmailingJson: org.aicgroup.yadaps.JSONObjectPlus \u003d {\"targetGroup\":{\"AbnahmeSynchronisation\":null,\"name\":\"NBO-Frauen\",\"description\":\"\",\"id\":\"238\"},\"desiredResponseQuota\":0,\"endDate\":20180413010030,\"broadmailTemplateId\":null,\"channel\":{\"name\":\"freier Kanal\",\"description\":\"freier Kanal\",\"id\":\"0\",\"type\":{\"name\":\"Frei\",\"description\":null,\"id\":\"0\"}},\"description\":\"V1-NBO-Frauen\",\"validFrom\":1526387586244,\"organistaionUnitId\":\"1\",\"extractionDate\":\"20180322060000\",\"controlPotential\":0,\"controlGroupAbsolut\":1000,\"limit\":50000,\"name\":\"Spooky Variant\",\"iteration\":\"1\",\"actionId\":\"439\",\"campaign\":{\"LinkKampagne\":\"\",\"ZeichenketteKampagne\":\"\",\"CheckboxKampagne\":false,\"DatumKampagne\":\"2018-05-15T12:33:06.219Z\",\"id\":\"287\",\"type\":{\"color\":\"default\",\"name\":\"Frei\",\"description\":null,\"id\":\"1\",\"status\":\"0\"},\"...ctx: org.aicgroup.yadaps.yAisuite.CtxEnv \u003d CtxEnv({\"targetGroup\":{\"AbnahmeSynchronisation\":null,\"name\":\"NBO-Frauen\",\"description\":\"\",\"id\":\"238\"},\"desiredResponseQuota\":0,\"endDate\":20180413010030,\"broadmailTemplateId\":null,\"channel\":{\"name\":\"freier Kanal\",\"description\":\"freier Kanal\",\"id\":\"0\",\"type\":{\"name\":\"Frei\",\"description\":null,\"id\":\"0\"}},\"description\":\"V1-NBO-Frauen\",\"validFrom\":1526387586244,\"organistaionUnitId\":\"1\",\"extractionDate\":\"20180322060000\",\"controlPotential\":0,\"controlGroupAbsolut\":1000,\"limit\":50000,\"name\":\"Spooky Variant\",\"iteration\":\"1\",\"actionId\":\"439\",\"campaign\":{\"LinkKampagne\":\"\",\"ZeichenketteKampagne\":\"\",\"CheckboxKampagne\":false,\"DatumKampagne\":\"2018-05-15T12:33:06.219Z\",\"id\":\"287\",\"type\":{\"color\":\"default\",\"name\":\"Frei\",\"description\":null,\"id\":\"1\",\"status\":\"0\"},\"...mailingName: String \u003d Spooky Variant\nresultsDir: String \u003d ./work/4711/results\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544346774293_97989221",
+      "id": "20181209-101254_1711947212",
+      "dateCreated": "2018-12-09 10:12:54.293",
+      "dateStarted": "2018-12-10 11:40:01.489",
+      "dateFinished": "2018-12-10 11:40:06.407",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Query the database for the customer list",
+      "text": "%yadaps_aisuite\n// as first thing we insert the helper table to the dwh (the return value is a dataframe, if you like print the count to the console)\nval custHelperTable \u003d extraction.custHelperTable(mailingId, jdbcCredits)\n//val custIds \u003d extraction.customersToDB(extraction.loadCustomerIds(),mailingId, jdbcCredits)\n//println(s\"Customers to process :${custIds.count()}\")\n\n// The query to execute may need some data from the ctx object, this can be done by simply using the yInterpolation for retriving values from the context\nval sql \u003d s\"\"\"\n(  SELECT\n|  A.PARTNERCARD_NR as PARTNERCARD_NR,\n|  LEFT(A.PARTNERCARD_NR,4) + \u0027 \u0027 + SUBSTRING(A.PARTNERCARD_NR,5,4) + \u0027 \u0027 + RIGHT(A.PARTNERCARD_NR,4) as PARTNERCARD_NR_2,\n|  C.VALUE_NAME as ANREDE_K_ADRESSE,\n|  A.ANSCHREIB_TITEL as TITEL_K_ADRESSE,\n|  A.ANSCHREIB_VORNAME as VORNAME_K_ADRESSE,\n|  A.ANSCHREIB_NAME as NACHNAME_K_ADRESSE,\n|  E.VALUE_NAME as ANREDE_K_ANSP,\n|  A.ANSPRACHE_TITEL as TITEL_K_ANSP,\n|  A.ANSPRACHE_VORNAME as VORNAME_K_ANSP,\n|  A.ANSPRACHE_NAME as NACHNAME_K_ANSP,\n|  A.FIRMENAME_1 as FIRMENNAME1_K,\n|  A.FIRMENAME_2 as FIRMENNAME2_K,\n|  A.ADRESSZUSATZ as ADRESSZUSATZ,\n|  A.STRASSE as STRASSE_K,\n|  A.HAUSNUMMER as HAUSNUMMER_K,\n|  A.ZUSTELLHINWEIS as ZUSTELLHINWEIS_K,\n|  A.PLZ as PLZ_K,\n|  A.STADT as ORT_K,\n|  A.ORTSTEIL as ORTSTEIL_K,\n|  A.LAND as LAND_K,\n|  G.VALUE_NAME as KUNDENGRUPPE_K,\n|  I.VALUE_ID as UMSATZSTATUS_K,\n|  A.KARTENTYP as MAILING_EMPFAENGER,\n|  B.STORE_ID as GESELLSCHAFTER_NR,\n|  B.LETTERHEAD1 as NAME_BRIEFKOPF_G,\n|  B.LETTERHEAD2 as NAME_BRIEFKOPF_G2,\n|  B.STREETNAME as STRASSE_G,\n|  B.ZIPCODE_ID as PLZ_G,\n|  B.CITY as ORT_G,\n|  B.STORE_CARDTYPE_ID as KARTENART,\n|  B.UNTERSCHRIFT as UNTERSCHRIFT,\n|  CASE WHEN B.UNTERSCHRIFT \u003d 1 THEN B.GREETINGLINE1 + \u0027 \u0027 + B.GREETINGLINE2 ELSE \u0027\u0027 END as UNTERSCHRIFT_1,\n|  CASE WHEN B.UNTERSCHRIFT \u003d 2 THEN B.UNTERSCHRIFT_2_AP ELSE \u0027\u0027 END as UNTERSCHRIFT_2_AP,\n|  CASE WHEN B.UNTERSCHRIFT \u003d 2 THEN B.UNTERSCHRIFT_2_POS ELSE \u0027\u0027 END as UNTERSCHRIFT_2_POS,\n|  246063615 as KDNR_PREMIUMADRESS,\n|  cast($mailingId as varchar) + A.PARTNERCARD_NR as ANFRAGE_ID,\n|  B.PRA_ID_INT as PRA_ID_INT,\n|  CASE WHEN (A.GEBURTSTAG IS NOT NULL AND ( YEAR(GETDATE()) - YEAR(A.GEBURTSTAG)) % 5  \u003d 0) THEN L.JUBI_GUTSCHEIN_NAME ELSE K.GEB_GUTSCHEIN_NAME END AS GEBU_GUTSCHEIN_TEXT,\n|  CASE WHEN (A.GEBURTSTAG IS NOT NULL AND ( YEAR(GETDATE()) - YEAR(A.GEBURTSTAG)) % 5  \u003d 0) THEN B.JUBI_RECHTSTEXT_1 ELSE B.GEBU_RECHTSTEXT_1 END AS GEBU_RECHTSTEXT_1,\n|  CASE WHEN (A.GEBURTSTAG IS NOT NULL AND ( YEAR(GETDATE()) - YEAR(A.GEBURTSTAG)) % 5  \u003d 0) THEN B.JUBI_RECHTSTEXT_2 ELSE B.GEBU_RECHTSTEXT_2 END AS GEBU_RECHTSTEXT_2,\n|  CASE WHEN (A.GEBURTSTAG IS NOT NULL AND ( YEAR(GETDATE()) - YEAR(A.GEBURTSTAG)) % 5  \u003d 0) THEN B.JUBI_RECHTSTEXT_3 ELSE B.GEBU_RECHTSTEXT_3 END AS GEBU_RECHTSTEXT_3\n|  \n|  FROM LV_CUSTOMER A, $custHelperTable Helper, LV_STORE B, \n|                LV_SALUTATION C , RV_CUST_LOOKUP D , \n|                LV_SALUTATION E , RV_CUST_LOOKUP F,\n|                LV_DMC_GRUPPE G , RV_CUST_LOOKUP H,\n|                LV_REVENUESTATUS I , RV_CUST_LOOKUP J,\n|                LV_GEB_GUTSCHEIN K, LV_JUBI_GUTSCHEIN L\n|                WHERE A.STAMMFILIALE \u003d B.STORE_ID AND A.CUST_ID \u003d Helper.id \n|                AND A.HK_CUST_ID \u003d D.CUST_ID AND D.LOOKUP_GROUP_ID \u003d C.LOOKUP_GROUP_ID AND D.VALUE_ID \u003d C.VALUE_ID \n|                AND A.CUST_ID \u003d F.CUST_ID AND F.LOOKUP_GROUP_ID \u003d E.LOOKUP_GROUP_ID AND F.VALUE_ID \u003d E.VALUE_ID \n|                AND A.HK_CUST_ID \u003d H.CUST_ID AND H.LOOKUP_GROUP_ID \u003d G.LOOKUP_GROUP_ID AND H.VALUE_ID \u003d G.VALUE_ID \n|                AND A.HK_CUST_ID \u003d J.CUST_ID AND J.LOOKUP_GROUP_ID \u003d I.LOOKUP_GROUP_ID AND J.VALUE_ID \u003d I.VALUE_ID \n|                AND B.GEB_GUTSCHEIN_ID \u003d K.GEB_GUTSCHEIN_ID\n|                AND B.JUBI_GUTSCHEIN_ID \u003d L.JUBI_GUTSCHEIN_ID\n|                -- AND H.Mailing_ID \u003d $mailingId\n|                ) customer\n\"\"\"\n\n// mailing name can contain evil chars, so let us remove them from the file name:\ndef safeFileString(s:String): String \u003d s.replaceAll(\"[^a-zA-Z0-9-_\\\\.]\", \"\")\n// we need surrounding brackets for the mailingId, otherwise the _ will be recognized as a wildcard.\nval saveFileMailingName \u003d safeFileString(s\"${mailingId}_$mailingName.csv\")\n\n// now simply write it to the file system\nval customersDF \u003d extraction.sqlToCsv(sql,resultsDir,saveFileMailingName)\n// That\u0027s it, folks!\n",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:12.194",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "custHelperTable: String \u003d AIS_EXTR__4711\nsql: String \u003d\n\"\n(  SELECT\n  A.PARTNERCARD_NR as PARTNERCARD_NR,\n  LEFT(A.PARTNERCARD_NR,4) + \u0027 \u0027 + SUBSTRING(A.PARTNERCARD_NR,5,4) + \u0027 \u0027 + RIGHT(A.PARTNERCARD_NR,4) as PARTNERCARD_NR_2,\n  C.VALUE_NAME as ANREDE_K_ADRESSE,\n  A.ANSCHREIB_TITEL as TITEL_K_ADRESSE,\n  A.ANSCHREIB_VORNAME as VORNAME_K_ADRESSE,\n  A.ANSCHREIB_NAME as NACHNAME_K_ADRESSE,\n  E.VALUE_NAME as ANREDE_K_ANSP,\n  A.ANSPRACHE_TITEL as TITEL_K_ANSP,\n  A.ANSPRACHE_VORNAME as VORNAME_K_ANSP,\n  A.ANSPRACHE_NAME as NACHNAME_K_ANSP,\n  A.FIRMENAME_1 as FIRMENNAME1_K,\n  A.FIRMENAME_2 as FIRMENNAME2_K,\n  A.ADRESSZUSATZ as ADRESSZUSATZ,\n  A.STRASSE as STRASSE_K,\n  A.HAUSNUMMER as HAUSNUMMER_K,\n  A.ZUSTELLHINWEIS as ZUSTELLHINWEIS_K,\n  A.PLZ as PLZ_K,\n  A.STADT as ORT_K,\n  A.ORTSTEIL as ORTSTEIL_K,\n  A.LAND as LAND_K,\n  G.VALUE_NAM...safeFileString: (s: String)String\nsaveFileMailingName: String \u003d 4711_SpookyVariant.csv\ncustomersDF: org.apache.spark.sql.DataFrame \u003d [PARTNERCARD_NR: string, PARTNERCARD_NR_2: string ... 39 more fields]\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://192.168.200.49:4040/jobs/job?id\u003d0"
+          ],
+          "interpreterSettingId": "yadaps_aisuite"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1544368563681_-1855240408",
+      "id": "20181209-161603_734908029",
+      "dateCreated": "2018-12-09 16:16:03.681",
+      "dateStarted": "2018-12-10 11:40:06.517",
+      "dateFinished": "2018-12-10 11:41:44.446",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "AVS-Part (control.xml and customerList.json)",
+      "text": "%yadaps_aisuite\n// we need the dataframe extension mechanism\nimport org.aicgroup.yadaps.jdbc.DataFrameExtensions._\n// Creation of the customers file\n\nval dfOut \u003d customersDF.withColumnRenamed(\"PARTNERCARD_NR\", \"KUNDENNR\").withColumn(\"mailingId\", lit(y\"${\"id\"}\")).withColumn(\"mailingName\",lit(y\"${\"name\"}\")).withColumn(\"channelId\",lit(y\"${\"channel.id\"}\")).jsonOut(s\"/AIC_Teilnehmer_$mailingId.json\", s\"$resultsDir\")\n\n// count the dataframe\nval cnt \u003d customersDF.count()\n// Creation of the control.xml file\n// create the control.json file as tmp file, we rename it later to control.json\nIO.touchFile(s\"$resultsDir/control.tmp\",\"utf-8\",jsonSingle(s\"{\u0027action\u0027: \u0027Teilnehmer\u0027, \u0027source\u0027 : \u0027AIC_Teilnehmer_$mailingId.json\u0027, \u0027rowCount\u0027 : $cnt}\").toString())\n",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:12.213",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "title": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.aicgroup.yadaps.jdbc.DataFrameExtensions._\ndfOut: Unit \u003d ()\ncnt: Long \u003d 5090\n"
+          }
+        ]
+      },
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            "http://192.168.200.49:4040/jobs/job?id\u003d1",
+            "http://192.168.200.49:4040/jobs/job?id\u003d2"
+          ],
+          "interpreterSettingId": "yadaps_aisuite"
+        }
+      },
+      "apps": [],
+      "jobName": "paragraph_1544367168720_-925644708",
+      "id": "20181209-155248_649501793",
+      "dateCreated": "2018-12-09 15:52:48.720",
+      "dateStarted": "2018-12-10 11:41:44.506",
+      "dateFinished": "2018-12-10 11:43:20.732",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Distribution Part",
+      "text": "%md\nDie Datei control.json und die zugehörige Kundenliste aic_teilnehmer_{mailingId}.json werden auf den FTP_Server, der in der yadaps-Interpreter Konfiguration unter avs.ftp[host,username,passwort] übertragen.\nDie csv-Datei {mailingName}_{mailingId}.csv wird auf ein geshartes Dateisystem verschoben.\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:12.232",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionKey": "TAB",
+          "completionSupport": false
+        },
+        "editorMode": "ace/mode/markdown",
+        "title": true,
+        "editorHide": true,
+        "tableHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eDie Datei control.json und die zugehörige Kundenliste aic_teilnehmer_{mailingId}.json werden auf den FTP_Server, der in der yadaps-Interpreter Konfiguration unter avs.ftp[host,username,passwort] übertragen.\u003cbr/\u003eDie csv-Datei {mailingName}_{mailingId}.csv wird auf ein geshartes Dateisystem verschoben.\u003c/p\u003e\n\u003c/div\u003e"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544347216123_1799675303",
+      "id": "20181209-102016_2037119322",
+      "dateCreated": "2018-12-09 10:20:16.123",
+      "dateStarted": "2018-12-10 11:43:20.822",
+      "dateFinished": "2018-12-10 11:43:23.467",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "title": "Transfer files to avs-ftp and hagebau-ftp",
+      "text": "%yadaps_aisuite\n// production mode must be set to true from the environmental variables\nval prodMode \u003d if (z.input(\"environment\").toString \u003d\u003d \"production\" ) true else false\n\nif(prodMode){\n    println(\"running in production mode, transferring files to the distributor\")\n    //------------------------------------------------------------------------------------------------------\n    // Part1 : Avs ftp file transfer\n    //------------------------------------------------------------------------------------------------------\n    implicit val sftpCredits \u003d ftp.creditsByName(\"ftp.avs\")\n    val rootDirAvs \u003d \".\"\n    // the files for avs will be transferred to sftp by doing the following:\n    // 1. Copy the customer-list as is to the remote directory\n    // 2. Copy the control.json as control.tmp\n    // 3. Rename the control.tmp file to control.json\n    println(s\"$resultsDir/AIC_Teilnehmer_$mailingId.json\")\n    ftp.put(rootDirAvs, Seq(s\"$resultsDir/AIC_Teilnehmer_$mailingId.json\")) /* 1 */ \n    ftp.put(rootDirAvs, Seq(s\"$resultsDir/control.tmp\")) /* 2 */ \n    ftp.rename(\"control.tmp\",\"control.json\",rootDirAvs) /* 3 */ \n    //------------------------------------------------------------------------------------------------------\n    // Part2 : hagebau ftp file transfer\n    //------------------------------------------------------------------------------------------------------\n    val rootDirHagebau \u003d \".\"\n    println(s\"$resultsDir/$saveFileMailingName\")\n    // 1. Simply copy the file as is to the remote directory\n    ftp.put(rootDirHagebau, Seq(s\"$resultsDir/$saveFileMailingName\"))\n    // ok, we\u0027re done, finished\n}else{\n    println(\"running in emulation mode, not transferring any files\")\n}\n",
+      "user": "anonymous",
+      "dateUpdated": "2018-12-10 11:44:52.211",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": true,
+        "title": true
+      },
+      "settings": {
+        "params": {
+          "environment": "production"
+        },
+        "forms": {
+          "environment": {
+            "type": "TextBox",
+            "name": "environment",
+            "displayName": "environment",
+            "defaultValue": "",
+            "hidden": false
+          }
+        }
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "warning: there was one deprecation warning; re-run with -deprecation for details\nprodMode: Boolean \u003d true\nrunning in production mode, transferring files to the distributor\n./work/4711/results/AIC_Teilnehmer_4711.json\n./work/4711/results/4711_SpookyVariant.csv\nres37: Any \u003d List(org.aicgroup.yadaps.FileRecord@35178d3e)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "jobName": "paragraph_1544347716097_1200033822",
+      "id": "20181209-102836_120569273",
+      "dateCreated": "2018-12-09 10:28:36.097",
+      "dateStarted": "2018-12-10 11:43:23.517",
+      "dateFinished": "2018-12-10 11:43:25.697",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "/hagebau/GeburtstagPrint",
+  "id": "2DYCFBDB8",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {
+    "yadaps_aisuite:shared_process": [],
+    "md:shared_process": [],
+    "yadaps_http:shared_process": []
+  },
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
