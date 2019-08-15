@@ -1,2 +1,2 @@
 # zeppelin-notes
-Simple temp directory for storing notes from Apache zeppelin
+Repository for my local zeppelin 
